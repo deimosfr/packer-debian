@@ -1,0 +1,73 @@
+{
+    "variables": {
+        "debian_version": "7.7.0",
+        "iso_checksum": "5cb6e4fea55fbb5173f90c3a545b843c6c193e29c3aa32b3306c9bbdfb1ad6a6a36ae8be50e91af9d03d5f21c472bd05d04d3508172e0b519e76714333c7c74b"
+    },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_command": [
+        "<esc><wait>",
+        "install <wait>",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "debian-installer=en_US <wait>",
+        "auto <wait>",
+        "locale=en_US <wait>",
+        "kbd-chooser/method=us <wait>",
+        "keyboard-configuration/xkb-keymap=us <wait>",
+        "netcfg/get_hostname={{ .Name }} <wait>",
+        "netcfg/get_domain=vagrantup.com <wait>",
+        "fb=false <wait>",
+        "debconf/frontend=noninteractive <wait>",
+        "console-setup/ask_detect=false <wait>",
+        "console-keymaps-at/keymap=us <wait>",
+        "<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 32768,
+      "guest_os_type": "Debian_64",
+      "headless": true,
+      "http_directory": "http",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "sha512",
+      "iso_url": "http://cdimage.debian.org/cdimage/release/{{user `debian_version`}}/amd64/iso-cd/debian-{{user `debian_version`}}-amd64-netinst.iso",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "echo 'vagrant'|sudo -S /sbin/shutdown -hP now",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "debian-{{user `debian_version`}}-amd64",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "512" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "1" ]
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "compression_level": "9",
+      "output": "debian-{{user `debian_version`}}-amd64_{{.Provider}}.box"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+      "scripts": [
+        "scripts/update.sh",
+        "scripts/sshd.sh",
+        "scripts/networking.sh",
+        "scripts/sudoers.sh",
+        "scripts/vagrant.sh",
+        "scripts/puppet.sh",
+        "scripts/chef.sh",
+        "scripts/vbaddguest.sh",
+        "scripts/cleanup.sh"
+      ]
+    }
+  ]
+}
+
