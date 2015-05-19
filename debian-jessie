@@ -1,7 +1,7 @@
 {
     "variables": {
-        "debian_version": "testing",
-        "iso_checksum": "d682ed6acb710819793c0375b41aeb5ebe9df17a1d87fb4f882e0dde72f19875b7a57216880c4d9e68a750d79421141f34871c056e702d4c691d133c11bcd3ce"
+        "debian_version": "8.0.0",
+        "iso_checksum": "95b46c1c8cb3a02f7b65b5de5dd57d335424684e4b605c2786b168b4851bc17b0b6bf4a53ba22a701532d01883ff4de393ad896ed5595e6c8fd1652d0e3e5690"
     },
   "builders": [
     {
@@ -30,7 +30,7 @@
       "http_directory": "http",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "sha512",
-      "iso_url": "http://cdimage.debian.org/cdimage/weekly-builds/amd64/iso-cd/debian-{{user `debian_version`}}-amd64-netinst.iso",
+      "iso_url": "http://cdimage.debian.org/cdimage/release/{{user `debian_version`}}/amd64/iso-cd/debian-{{user `debian_version`}}-amd64-netinst.iso",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_port": 22,
