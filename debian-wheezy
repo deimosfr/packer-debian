@@ -1,7 +1,6 @@
 {
     "variables": {
-        "debian_version": "7.8.0",
-        "iso_checksum": "9792020579824057723446a92ab97d50fdb7af15d265ff4be9081a963e36b3e3e6f44127766219320bc863c6a7ec378388a9d6faa7b51c3f74b259dc9049e071"
+        "debian_version": "7.8.0"
     },
   "builders": [
     {
@@ -28,8 +27,7 @@
       "guest_os_type": "Debian_64",
       "headless": true,
       "http_directory": "http",
-      "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "sha512",
+      "iso_checksum_type": "none",
       "iso_url": "http://cdimage.debian.org/cdimage/release/{{user `debian_version`}}/amd64/iso-cd/debian-{{user `debian_version`}}-amd64-netinst.iso",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
