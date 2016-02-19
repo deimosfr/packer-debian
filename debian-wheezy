@@ -59,9 +59,6 @@
         "scripts/sshd.sh",
         "scripts/sudoers.sh",
         "scripts/vagrant.sh",
-        "scripts/puppet.sh",
-        "scripts/ansible.sh",
-        "scripts/chef.sh",
         "scripts/networking.sh",
         "scripts/vbaddguest.sh",
         "scripts/cleanup.sh"
