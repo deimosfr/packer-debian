@@ -1,6 +1,6 @@
 {
     "variables": {
-        "debian_version": "7.8.0"
+        "debian_version": "7.9.0"
     },
   "builders": [
     {
@@ -28,7 +28,7 @@
       "headless": true,
       "http_directory": "http",
       "iso_checksum_type": "none",
-      "iso_url": "http://cdimage.debian.org/cdimage/release/{{user `debian_version`}}/amd64/iso-cd/debian-{{user `debian_version`}}-amd64-netinst.iso",
+      "iso_url": "http://cdimage.debian.org/cdimage/archive/{{user `debian_version`}}/amd64/iso-cd/debian-{{user `debian_version`}}-amd64-netinst.iso",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_port": 22,
