@@ -1,6 +1,6 @@
 {
     "variables": {
-        "debian_version": "8.5.0"
+        "debian_version": "8.8.0"
     },
   "builders": [
     {
@@ -27,8 +27,10 @@
       "guest_os_type": "Debian_64",
       "headless": true,
       "http_directory": "http",
-      "iso_checksum_type": "none",
+      "iso_checksum_type": "sha512",
+      "iso_checksum_url": "http://cdimage.debian.org/cdimage/archive/{{user `debian_version`}}/amd64/iso-cd/SHA512SUMS",
       "iso_url": "http://cdimage.debian.org/cdimage/archive/{{user `debian_version`}}/amd64/iso-cd/debian-{{user `debian_version`}}-amd64-netinst.iso",
+
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_port": 22,
